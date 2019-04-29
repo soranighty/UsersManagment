@@ -1,0 +1,99 @@
+<form class="userForm" #f="ngForm">
+  <input type="hidden" name="id" [(ngModel)]="user.id">
+
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      <label for="firstname">First name</label>
+      <input class="form-control" #firstName="ngModel" name="firstname" id="firstname" [(ngModel)]="user.name"
+        placeholder="First name" required pattern="[a-zA-Z\s]*" minlength="3">
+      <!-- regular Expression contenuto nel pattern  -->
+
+      <div *ngIf="firstName.dirty && firstName.touched && firstName.invalid ">
+        <div class="alert-danger" *ngIf="firstName.errors.required">
+          The field first name is required
+        </div>
+        <div class="alert-danger" *ngIf="firstName.errors.minlength">
+          The min length of field is {{firstName.errors.minlength.requiredLength | json}} chars
+        </div>
+        <div class="alert-danger" *ngIf="firstName.errors.pattern">
+          The field pattern is {{firstName.errors.pattern.requiredPattern | json}}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+      <label for="lastname">Last name</label>
+      <input class="form-control" #lastName="ngModel" name="lastname" id="lastname" [(ngModel)]="user.lastname"
+      placeholder="Last name" required pattern="[a-zA-Z\s]*" minlength="3">
+
+      <div *ngIf="lastName.dirty && lastName.touched && lastName.invalid ">
+          <div class="alert-danger" *ngIf="lastName.errors.required">
+            The field first name is required
+          </div>
+          <div class="alert-danger" *ngIf="lastName.errors.minlength">
+            The min length of field is {{lastName.errors.minlength.requiredLength | json}} chars
+          </div>
+          <div class="alert-danger" *ngIf="lastName.errors.pattern">
+            The field pattern is {{lastName.errors.pattern.requiredPattern | json}}
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      <label for="age">Age</label>
+      <input class="form-control" #age= "ngModel" type="number" name="age" id="age" [(ngModel)]="user.age" 
+      placeholder="Age" required minlength="2" pattern="[0-9]{2,3}">
+
+      <div *ngIf="age.dirty && age.touched && age.invalid ">
+          <div class="alert-danger" *ngIf="age.errors.required">
+            The field first name is required
+          </div>
+          <div class="alert-danger" *ngIf="age.errors.minlength">
+            The min length of field is {{age.errors.minlength.requiredLength | json}} chars
+          </div>
+          <div class="alert-danger" *ngIf="age.errors.pattern">
+            The field pattern is {{age.errors.pattern.requiredPattern | json}}
+          </div>
+        </div>
+    </div>
+    
+    <div class="form-group col-sm-6">
+      <label for="fiscalCode">Fiscal code</label>
+      <input class="form-control" name="fiscalCode" id="fiscalCode" [(ngModel)]="user.fiscalCode"
+        placeholder="Fiscal code">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      <label for="email">Email</label>
+      <input class="form-control" name="email" id="email" [(ngModel)]="user.email" placeholder="Email">
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="phone">Phone</label>
+      <input class="form-control" name="phone" id="phone" [(ngModel)]="user.phone" placeholder="Phone">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-6 offset-sm-3">
+      <label for="city">City</label>
+      <input class="form-control" name="city" id="city" [(ngModel)]="user.city" placeholder="City">
+    </div>
+
+  </div>
+
+  <div class="form-group form-footer text-center">
+    <button class="btn btn-reset btn-danger" (click)="resetForm(form)">
+      <fa name="refresh"></fa> RESET
+    </button>
+    <button [disabled]="f.invalid" class="btn btn-save btn-primary" (click)="saveUser()">
+      <fa name="save"></fa> SAVE
+    </button>
+    <button class="btn btn-success" (click)="backToUsers()">
+      <fa name="chevron-left"></fa> BACK
+    </button>
+  </div>
+</form>

@@ -1,0 +1,8 @@
+* {
+    color: white;
+    font-weight: bold;
+}
+
+a.nav-lin:hover{
+    color: red;
+}

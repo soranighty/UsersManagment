@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class=" container text-center">
+      <h3>LOGIN</h3>
+    </div>
+    <form name="loginForm" #f="ngForm" (ngSubmit)="signIn(f)">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" ngModel #email="ngModel" name="email" id="email" required email>
+
+        <div *ngIf="email.dirty && email.touched && email.invalid ">
+          <div class="alert-danger" *ngIf="email.errors.required">
+            The field email is required
+          </div>
+          <div class="alert-danger" *ngIf="email.errors.email">
+            The value must be a valid email
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" ngModel type="password" #password="ngModel" name="password" id="password" required
+          minlength="6">
+
+        <div *ngIf="password.dirty && password.touched && password.invalid ">
+          <div class="alert-danger" *ngIf="password.errors.required">
+            The field password is required
+          </div>
+          <div class="alert-danger" *ngIf="password.errors.minlength">
+            The field password must be {{password.errors.minlength.requiredLength | json}} chars
+          </div>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button [disabled]="!f.valid" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
